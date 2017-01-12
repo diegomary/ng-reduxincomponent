@@ -1,13 +1,25 @@
 import angular from 'angular';
 import { combineReducers } from 'redux';
+//import { thunk } from 'redux';
 import ngRedux from 'ng-redux';
 import flowerreducer from '../redux/reducer';
 import { actionFactory } from '../redux/reducer_actions'
 
 'use strict';
 
-  let app = angular.module("app", [ngRedux]); 
-  app.config(['$ngReduxProvider', function(redux) {redux.createStoreWith(flowerreducer , [],[],JSON.parse(localStorage.getItem("appstate")));
+
+function logActiontoConsole() {
+    return store => next => action => {
+        console.log(action);
+    }
+}
+
+
+
+  let app = angular.module("app", [ngRedux]);
+  app.service('redux_logger', logActiontoConsole);
+
+  app.config(['$ngReduxProvider', function(redux) {redux.createStoreWith(flowerreducer , ['redux_logger'],[],JSON.parse(localStorage.getItem("appstate")));
 
   }]);
   app.value('urlFlowers', 'https://dmm888enhanced.apphb.com/api/apicode/getflowers');
@@ -34,7 +46,6 @@ import { actionFactory } from '../redux/reducer_actions'
     ngRedux.dispatch(actionFactory().addItem('How are you'));
     ngRedux.dispatch(actionFactory().addItem('New part'));
     ngRedux.dispatch(actionFactory().addItem('Another system'));
-
     console.log(ngRedux.getState(),'----IN COMPONENT CONTROLLER');
 
     this.state = {};
