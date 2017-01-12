@@ -1,5 +1,6 @@
 import angular from 'angular';
-import { combineReducers } from 'redux';
+//import { combineReducers } from 'redux';
+import createLogger from 'redux-logger';
 //import { thunk } from 'redux';
 import ngRedux from 'ng-redux';
 import flowerreducer from '../redux/reducer';
@@ -7,19 +8,29 @@ import { actionFactory } from '../redux/reducer_actions'
 
 'use strict';
 
+const logger = createLogger({
+  level: 'info',
+   collapsed: true  
+});
 
-function logActiontoConsole() {
-    return store => next => action => {
-        console.log(action);
+
+function overrideStatePersistor() {
+    return store => next => action => {      
+        // State before the dispatch
+        console.log(store.getState(), '---Before Action Dispatch');
+        // Override here calling the next dispatch method 
+        next(action);
+        // State after the dispatch
+        console.log(store.getState(),'---After Action Dispatch');
     }
 }
 
 
 
   let app = angular.module("app", [ngRedux]);
-  app.service('redux_logger', logActiontoConsole);
+  app.service('redux_override_state_persistor', overrideStatePersistor);
 
-  app.config(['$ngReduxProvider', function(redux) {redux.createStoreWith(flowerreducer , ['redux_logger'],[],JSON.parse(localStorage.getItem("appstate")));
+  app.config(['$ngReduxProvider', function(redux) {redux.createStoreWith(flowerreducer , ['redux_override_state_persistor'] ,[],JSON.parse(localStorage.getItem("appstate")));
 
   }]);
   app.value('urlFlowers', 'https://dmm888enhanced.apphb.com/api/apicode/getflowers');
