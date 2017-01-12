@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title ng-bind="pageTitle"></title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+<link href="css/component.css" rel="stylesheet" type="text/css">
+
+
+  </head>
+
+  <body ng-app="app" ng-controller="parentController as mainCtrl">
+ <div class="container ">
+   <div class="row ">
+     <custom-component message="mainCtrl.message" reason="Stand alone component Angular 1.5.5"></custom-component>
+   </div>
+
+     <div class="row ">
+         <div class="col-xs-4">Time travel to</div>
+   <div class="col-xs-4"> 
+   </div>
+   <div class="col-xs-8">
+    </div>
+   </div>
+
+ </div>
+
+      <script src="main.js"></script>
+   </body>
+
+</html>

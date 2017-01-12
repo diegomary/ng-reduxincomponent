@@ -1,0 +1,51 @@
+<div class="container bck">
+  <div class="row white-color">
+    {{vm.reason}}
+  </div>
+  <div class="row purple-color"><small>{{vm.message}}</small>
+  </div>
+  <div class="row">
+    <h3 class="red-color">{{vm.flower.Name}}</h3>
+  </div>
+  <div class="row">
+    <div class="col-xs-10">
+      <textarea rows="4" ng-model="vm.flower.Description"></textarea>
+    </div>
+    <div class="col-xs-2">
+      <div>
+        <button title="Previous flower" class="glyphicon glyphicon-minus" ng-click="vm.previous()"></button>
+      </div>
+      <div>
+        <button title="Next flower" class="glyphicon glyphicon-plus" ng-click="vm.next()"></button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <p ng-show="vm.ajax_error"><small>Error requesting data</small></p>
+  </div>
+  <div class="row white-color div-margin">
+    <div class="col-xs-2"><strong>Id</strong></div>
+    <div class="col-xs-4"><strong>Name</strong></div>
+    <div class="col-xs-6"><strong>Image</strong></div>
+  </div>
+
+  <div class="row white-color div-margin" ng-click="vm.select($index)" ng-repeat="flower in vm.getDataPage()" ng-class="{selected: flower.selected}">
+    <div class="col-xs-2"><small>{{flower.Id}}</small></div>
+    <div class="col-xs-4"><small>{{flower.Name}}</small></div>
+    <div class="col-xs-6"><img src="{{flower.ImagePath}}" alt="" width=30%></div>
+   </div>
+  <br>
+
+  <div class="row ">
+    <div class="col-xs-12  div-margin">
+    <span> <button title="Previous Page" class="glyphicon glyphicon-backward" ng-click="vm.prevPage()"></button>
+    &nbsp; <small class="white-color">{{vm.pageNumber}} of {{vm.numberOfPages}}</small>&nbsp;
+    <button title="Next flower" class="glyphicon glyphicon-forward" ng-click="vm.nextPage()"></button>
+       &nbsp;
+       <select ng-options="item as item for item in vm.pageSizes" ng-change="vm.calculatePageNumber()" ng-model="vm.pageSize">
+            <option disabled value="">Page by</option>
+       </select>
+    </span>
+    </div>
+  </div>
+</div>

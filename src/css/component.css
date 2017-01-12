@@ -1,0 +1,42 @@
+.bck {
+      background-color:black;
+      border-radius:20px;
+      padding:10%;
+}
+.white-color {
+
+  color:white;
+
+}
+
+.purple-color {
+
+  color:#ff7a7a;
+
+}
+
+
+.red-color {
+  
+  color:red;
+
+}
+
+.div-margin {margin:1%;}
+
+
+
+
+
+
+p {color:white;width:100%;}
+h3{color:red;}
+textarea{color:black;
+border-radius:10px;
+width:100%;
+background-color:grey;
+}
+
+.selected {
+  background-color: grey;
+}
