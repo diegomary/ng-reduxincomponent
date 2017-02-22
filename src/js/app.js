@@ -16,6 +16,7 @@ $(() => {
   //     return new Promise(function(resolve, reject) {
   //         let req = new XMLHttpRequest();
   //         req.open("GET", url);
+  //         req.setRequestHeader ("Accept", "text/json");  
   //         req.onload = () => {
   //             if (req.status === 200) {
   //                 resolve(req.response);
